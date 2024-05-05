@@ -1,5 +1,6 @@
 package com.example.clicker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -22,10 +23,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView timerTextView;
     private CountDownTimer bossTimer;
 
+    private DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        databaseHelper = new DatabaseHelper(this);
+        int level = databaseHelper.getUserLevel(getCurrentUsername());
 
         restartlevelButton = findViewById(R.id.restart_level_button);
         startgameButton = findViewById(R.id.start_game_button);
@@ -36,8 +42,13 @@ public class MainActivity extends AppCompatActivity {
         levelTextView = findViewById(R.id.level_text_view);
         timerTextView = findViewById(R.id.timer_text_view);
 
+        currentBossIndex=level-1;
+        bossHealths[currentBossIndex] = calculateBossHealth(currentBossIndex);
+        updateHealthText();
+        updateLevelText(level); // Обновляем уровень на главном экране
+
         bossButton.setEnabled(false); // Кнопка "Босс" неактивна до начала игры
-        restartlevelButton.setVisibility(View.INVISIBLE); // Показываем кнопку "Босс"
+        restartlevelButton.setVisibility(View.INVISIBLE); // Скрываем кнопку "Босс"
         levelTextView.setVisibility(View.VISIBLE); // Показываем уровень
 
         bossButton.setOnClickListener(new View.OnClickListener() {
@@ -74,13 +85,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame() {
-        startgameButton.setVisibility(View.INVISIBLE); // Показываем кнопку "Босс"
+        startgameButton.setVisibility(View.INVISIBLE); // Скрываем кнопку "Start Game"
         restartlevelButton.setVisibility(View.INVISIBLE); // Скрываем кнопку перезапуска
         bossButton.setVisibility(View.VISIBLE); // Показываем кнопку "Босс"
         bossButton.setEnabled(true); // Активируем кнопку "Босс"
         healthTextView.setVisibility(View.VISIBLE); // Показываем здоровье босса
         timerTextView.setVisibility(View.VISIBLE); // Показываем таймер
         startBossTimer(); // Запускаем таймер
+
+        // Получаем текущий уровень игрока из базы данных
+        int level = databaseHelper.getUserLevel(getCurrentUsername());
+        updateLevelText(level); // Вызываем с аргументом
+    }
+
+    private String getCurrentUsername() {
+        // Получаем имя пользователя из Intent, переданного из LoginActivity
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        return username != null ? username : ""; // Возвращаем имя пользователя или пустую строку, если имя не найдено
     }
 
     private void updateHealthText() {
@@ -128,14 +150,16 @@ public class MainActivity extends AppCompatActivity {
             updateHealthText();
             defeatedTextView.setVisibility(View.INVISIBLE);
             nextBossButton.setVisibility(View.INVISIBLE);
-            updateLevelText();
+            int level = currentBossIndex + 1;
+            updateLevelText(level); // Обновляем уровень на главном экране
+            // Обновляем уровень игрока в базе данных
+            databaseHelper.incrementUserLevel(getCurrentUsername());
         } else {
             Toast.makeText(this, "Поздравляем! Вы победили всех боссов!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void updateLevelText() {
-        int level = currentBossIndex + 1;
+    private void updateLevelText(int level) {
         levelTextView.setText("Уровень: " + level);
     }
 
