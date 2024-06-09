@@ -1,0 +1,63 @@
+<!-- activity_login.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:text="TUSUR Clicker Way to Success"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/username_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="114dp"
+        android:hint="Логин" />
+
+    <EditText
+        android:id="@+id/password_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="196dp"
+        android:hint="Пароль"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="301dp"
+        android:text="Войти" />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="407dp"
+        android:text="Зарегистрироваться" />
+
+</RelativeLayout>

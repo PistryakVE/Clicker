@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/endgame_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="589dp"
+        android:text="Поздравляю, вы прошли игру!"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/hooray_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="496dp"
+        android:text="УРА!"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/twoam_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-6dp"
+        android:layout_marginBottom="22dp"
+        android:text="Не зря я не спал до 2 ночи вчера"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/my_image"
+        android:layout_width="308dp"
+        android:layout_height="412dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginBottom="107dp"
+        android:src="@drawable/winreda" />
+
+</RelativeLayout>
